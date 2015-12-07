@@ -21,4 +21,4 @@ WORKDIR /build
 USER root
 
 # default cmd
-ENTRYPOINT ["arm-firemiles-linux-gcc"]
+ENTRYPOINT ["arm-firemiles-linux-gnueabi-gcc"]
