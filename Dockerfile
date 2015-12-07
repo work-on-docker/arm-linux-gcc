@@ -9,12 +9,15 @@ RUN \
     wget https://github.com/torvalds/linux/archive/v2.6.38.tar.gz && \
     mkdir arm-linux-gcc && cd arm-linux-gcc && \
     wget https://raw.githubusercontent.com/work-on-docker/arm-linux-gcc/arm6410-linux2.6.38-gnueabi-gcc5.2/.config && \
-    ct-ng build && ct-ng distclean && \
-    sudo mv /home/firemiles/x-tools/arm-firemiles-linux-gcc /opt && \
-    rm -rf /home/firemiles/*
+    ct-ng build && ct-ng distclean 
 
 # install
-ENV PATH=/opt/arm-firemiles-linux-gcc/bin:$PATH
+RUN \
+    sudo mv /home/firemiles/x-tools/arm-firemiles-linux-gnueabi /opt && \
+    rm -rf /home/firemiles/*
+
+# env
+ENV PATH=/opt/arm-firemiles-linux-gnueabi/bin:$PATH
 
 # build space
 WORKDIR /build
