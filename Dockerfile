@@ -4,15 +4,14 @@ MAINTAINER firemilesxu@gmail.com firemiles
 WORKDIR /home/firemiles
 USER firemiles
 
-# build
+COPY .config arm-linux-gcc/
+
+# build and install 
 RUN \
     wget https://github.com/torvalds/linux/archive/v2.6.38.tar.gz && \
-    mkdir arm-linux-gcc && cd arm-linux-gcc && \
-    wget https://raw.githubusercontent.com/work-on-docker/arm-linux-gcc/arm6410-linux2.6.38-gnueabi-gcc5.2/.config && \
-    ct-ng build && ct-ng distclean 
-
-# install
-RUN \
+    sudo chown -R firemiles:firemiles arm-linux-gcc && \
+    cd arm-linux-gcc && \
+    ct-ng build && ct-ng distclean && \ 
     sudo mv /home/firemiles/x-tools/arm-firemiles-linux-gnueabi /opt && \
     rm -rf /home/firemiles/*
 
