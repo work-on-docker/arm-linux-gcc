@@ -1,10 +1,11 @@
-FROM firemiles/crosstool-ng
+FROM firemiles/crosstool-ng:test
 MAINTAINER firemilesxu@gmail.com firemiles
 
 WORKDIR /home/firemiles
 USER firemiles
 
 COPY .config arm-linux-gcc/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # build and install 
 RUN \
@@ -22,5 +23,8 @@ ENV PATH=/opt/arm-firemiles-linux-gnueabi/bin:$PATH
 WORKDIR /build
 USER root
 
+# test tool
+RUN /docker-entrypoint.sh arm-linux-gcc -v
+
 # default cmd
-ENTRYPOINT ["arm-firemiles-linux-gnueabi-gcc"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
