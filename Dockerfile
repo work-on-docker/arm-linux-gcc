@@ -5,6 +5,7 @@ WORKDIR /home/firemiles
 USER firemiles
 
 COPY .config arm-linux-gcc/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # build and install 
 RUN \
@@ -23,4 +24,4 @@ WORKDIR /build
 USER root
 
 # default cmd
-ENTRYPOINT ["arm-firemiles-linux-gnueabi-gcc"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
