@@ -1,4 +1,4 @@
-FROM firemiles/crosstool-ng:test
+FROM firemiles/crosstool-ng
 MAINTAINER firemilesxu@gmail.com firemiles
 
 WORKDIR /home/firemiles
@@ -22,9 +22,6 @@ ENV PATH=/opt/arm-firemiles-linux-gnueabi/bin:$PATH
 # build space
 WORKDIR /build
 USER root
-
-# test tool
-RUN /docker-entrypoint.sh arm-linux-gcc -v
 
 # default cmd
 ENTRYPOINT ["/docker-entrypoint.sh"]
